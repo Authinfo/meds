@@ -34,9 +34,9 @@
                         <th>
                             {{ trans('cruds.income.fields.amount') }}
                         </th>
-                        <th>
+                        {{-- <th>
                             {{ trans('cruds.income.fields.description') }}
-                        </th>
+                        </th> --}}
                         <th>
                             &nbsp;
                         </th>
@@ -55,14 +55,14 @@
                                 {{ $income->income_category->name ?? '' }}
                             </td>
                             <td>
-                                {{ $income->entry_date ?? '' }}
+                                {{ Carbon\Carbon::parse($income->entry_date)->format('d M Y') ?? '' }}
                             </td>
                             <td>
                                 {{ $income->amount ?? '' }}
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ $income->description ?? '' }}
-                            </td>
+                            </td> --}}
                             <td>
                                 @can('income_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.incomes.show', $income->id) }}">

@@ -119,25 +119,37 @@ class BookingController extends Controller
 
         //   dd($nomor_order);
         if($nomor_order->status_booking == "0"){
-            //User belum bayar
-            DB::table('bookings')->where('nomor_order', $nomor_order->nomor_order)->update([
-                'status_booking' => '1',
+            $db = Booking::where('nomor_order', $nomor_order->nomor_order)->first();
+            $db->update([
+                'status_booking' => '1'
+            ]);
+            $i = 0;
+            foreach ($db->product_names as $k) {
+                $i += $k->price;
+            }
+        
+            $income = Income::create([
+                'entry_date' => $db->updated_at,
+                'amount' => $i,
+                'income_category_id' => $db->product_names[0]->id
             ]);
 
 
-            // dd($categories, $product_names, $harga);
-            $income = Income::create($request->all());
-            //$income->amount()->sync($request->get('amount'));
-            $categories->description()->sync($request->get('products', 'nanme'));
-            dd($income);
-            // Income::create($request->all());
-
-
-
         }else{
-            //User sudah bayar
-            DB::table('bookings')->where('nomor_order', $nomor_order->nomor_order)->update([
-                "status_booking" => "0"
+
+            $db = Booking::where('nomor_order', $nomor_order->nomor_order)->first();
+            $db->update([
+                'status_booking' => '0'
+            ]);
+
+            $i = 0;
+            foreach ($db->product_names as $k) {
+                $i += $k->price;
+            }
+            $income = Income::create([
+                'entry_date' => $db->updated_at,
+                'amount' => $i,
+                'income_category_id' => $db->product_names[0]->id
             ]);
         }
         return redirect()->back();
