@@ -26,9 +26,13 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-4">
+                <div class="col-3 form-group">
                     <label class="control-label">&nbsp;</label><br>
                     <button class="btn btn-primary" type="submit">{{ trans('global.filterDate') }}</button>
+                </div>
+                <div class="col-3 form-group">
+                    <label class="control-label">&nbsp;</label><br>
+                    <button class="btn btn-primary">PDF</button>
                 </div>
             </div>
         </form>
@@ -37,7 +41,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.expenseReport.reports.incomeReport') }}
+        Laporan {{$month}} Klinik Medic-A
     </div>
 
     <div class="card-body">
@@ -45,40 +49,13 @@
             <div class="col">
                 <table class="table table-bordered table-striped">
                     <tr>
-                        <th>{{ trans('cruds.expenseReport.reports.income') }}</th>
-                        <td>{{ number_format($incomesTotal, 2) }}</td>
+
                     </tr>
-                    <tr>
-                        <th>{{ trans('cruds.expenseReport.reports.expense') }}</th>
-                        <td>{{ number_format($expensesTotal, 2) }}</td>
-                    </tr>
-                    <tr>
-                        <th>{{ trans('cruds.expenseReport.reports.profit') }}</th>
-                        <td>{{ number_format($profit, 2) }}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col">
-                <table class="table table-bordered table-striped">
                     <tr>
                         <th>{{ trans('cruds.expenseReport.reports.incomeByCategory') }}</th>
                         <th>{{ number_format($incomesTotal, 2) }}</th>
                     </tr>
                     @foreach($incomesSummary as $inc)
-                        <tr>
-                            <th>{{ $inc['name'] }}</th>
-                            <td>{{ number_format($inc['amount'], 2) }}</td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
-            <div class="col">
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>{{ trans('cruds.expenseReport.reports.expenseByCategory') }}</th>
-                        <th>{{ number_format($expensesTotal, 2) }}</th>
-                    </tr>
-                    @foreach($expensesSummary as $inc)
                         <tr>
                             <th>{{ $inc['name'] }}</th>
                             <td>{{ number_format($inc['amount'], 2) }}</td>
