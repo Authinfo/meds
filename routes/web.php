@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ExpenseReportController;
+
 Route::view('/', 'welcome');
 Route::get('userVerification/{token}', 'UserVerificationController@approve')->name('userVerification');
 Auth::routes();
@@ -143,3 +145,4 @@ Route::group(['namespace' => 'Auth', 'middleware' => ['auth', '2fa']], function 
 });
 
 Route::get('ajax_get_product/{id}', 'Frontend\BookingController@ajax_get_product');
+Route::get('/expense/report', [ExpenseReportController::class, 'export'])->name('expense.export');

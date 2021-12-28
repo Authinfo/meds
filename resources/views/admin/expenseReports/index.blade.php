@@ -19,11 +19,11 @@
                 <div class="col-3 form-group">
                     <label class="control-label" for="m">{{ trans('global.month') }}</label>
                     <select name="m" for="m" class="form-control">
-                        @foreach(cal_info(0)['months'] as $month)
+                        {{-- @foreach(cal_info(0)['months'] as $month)
                             <option value="{{ $month }}" @if($month===old('m', Request::get('m', date('F')))) selected @endif>
                                 {{ $month }}
                             </option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                 </div>
                 <div class="col-3 form-group">
@@ -37,12 +37,13 @@
             </div>
         </form>
     </div>
+    <a href="{{ route('expense.export') }}" class="btn btn-primary">PDF</a>
 </div>
 
 <div class="card">
-    <div class="card-header">
+    {{-- <div class="card-header">
         Laporan {{$month}} Klinik Medic-A
-    </div>
+    </div> --}}
 
     <div class="card-body">
         <div class="row">
